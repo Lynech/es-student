@@ -8,7 +8,7 @@ include(pico_sdk_import.cmake)
 # cmake_path(GET path FILENAME path)
 # string(REPLACE - _ path ${path})
 # project(${path})
-project(131-hello-usb)
+project(131_hello_usb)
 
 pico_sdk_init()
 
