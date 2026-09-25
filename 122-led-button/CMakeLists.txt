@@ -4,11 +4,11 @@ set(PICO_PLATFORM rp2040)
 
 include(pico_sdk_import.cmake)
 
-set(path ${CMAKE_SOURCE_DIR} )
-cmake_path(GET path FILENAME path)
-string(REPLACE - _ path ${path})
-
-project(${path})
+# set(path ${CMAKE_SOURCE_DIR} )
+# cmake_path(GET path FILENAME path)
+# string(REPLACE - _ path ${path})
+# project(${path})
+ project(122_led_button)
 
 pico_sdk_init()
 
