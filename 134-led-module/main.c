@@ -2,6 +2,7 @@
 
 #include "hardware/gpio.h"
 #include "led.h"
+#include "log.h"
 #include "pico/stdlib.h"
 
 const uint BUTTON_PIN = 15;
@@ -16,12 +17,14 @@ bool get_button_debounce(uint pin) {
 void handle_command(int command) {
   if (command == 'e') {
     led_set(true);
-    printf("led %s\n", led_is_on() ? "on" : "off");
+    LOG_INF("led %s\n", led_is_on() ? "on" : "off");
   } else if (command == 'd') {
     led_set(false);
-    printf("led %s\n", led_is_on() ? "on" : "off");
+    LOG_INF("led %s\n", led_is_on() ? "on" : "off");
+  } else if (command == 'v') {
+    log_version();
   } else {
-    printf("unknown command: %c\n", command);
+    LOG_ERR("unknown command: %c\n", command);
   }
 }
 
@@ -41,12 +44,13 @@ int main() {
     current = get_button_debounce(BUTTON_PIN);
     if (prev == true && current == false) {
       led_toggle();
-      printf("led %s\n", led_is_on() ? "on" : "off");
+    LOG_INF("led %s\n", led_is_on() ? "on" : "off");
     }
     prev = current;
 
     int command = getchar_timeout_us(0);
     if (command == PICO_ERROR_TIMEOUT) continue;
+    LOG_DBG("got %c\n", command);
     handle_command(command);
   }
 }
