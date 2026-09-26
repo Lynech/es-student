@@ -14,16 +14,16 @@ void log_version(void);
 void log_prefix(const char *level, const char *function, int line);
 
 
-#define LOG(level, ...)                             \
+#define LOG(level, lvl_str, ...)                             \
     do                                              \
     {                                               \
         if (LOG_LEVEL >= level)                     \
         {                                           \
-            log_prefix("inf", __func__, __LINE__);  \
+            log_prefix(lvl_str, __func__, __LINE__);  \
             printf(__VA_ARGS__);                    \
         }                                           \
     } while (0)
 
-#define LOG_ERR(...) LOG(LOG_LEVEL_ERR, __VA_ARGS__)  
-#define LOG_INF(...) LOG(LOG_LEVEL_INF, __VA_ARGS__)  
-#define LOG_DBG(...) LOG(LOG_LEVEL_DBG, __VA_ARGS__)  
+#define LOG_ERR(...) LOG(LOG_LEVEL_ERR, "err", __VA_ARGS__)  
+#define LOG_INF(...) LOG(LOG_LEVEL_INF, "inf", __VA_ARGS__)  
+#define LOG_DBG(...) LOG(LOG_LEVEL_DBG, "dbg", __VA_ARGS__)  
